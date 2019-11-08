@@ -35,3 +35,11 @@ C:\Work\Progetti\Telegram\QuoteOfTheDay\obj\Debug\netcoreapp3.0\QuoteOfTheDay.cs
 C:\Work\Progetti\Telegram\QuoteOfTheDay\bin\Debug\netcoreapp3.0\Coravel.dll
 C:\Work\Progetti\Telegram\QuoteOfTheDay\bin\Debug\netcoreapp3.0\Microsoft.Extensions.Caching.Abstractions.dll
 C:\Work\Progetti\Telegram\QuoteOfTheDay\bin\Debug\netcoreapp3.0\Microsoft.Extensions.Caching.Memory.dll
+C:\Work\Progetti\Telegram\QuoteOfTheDay\bin\Debug\netcoreapp3.0\QuoteOfTheDay.deps.json
+C:\Work\Progetti\Telegram\QuoteOfTheDay\bin\Debug\netcoreapp3.0\QuoteOfTheDay.runtimeconfig.json
+C:\Work\Progetti\Telegram\QuoteOfTheDay\bin\Debug\netcoreapp3.0\QuoteOfTheDay.runtimeconfig.dev.json
+C:\Work\Progetti\Telegram\QuoteOfTheDay\bin\Debug\netcoreapp3.0\QuoteOfTheDay.dll
+C:\Work\Progetti\Telegram\QuoteOfTheDay\bin\Debug\netcoreapp3.0\QuoteOfTheDay.pdb
+C:\Work\Progetti\Telegram\QuoteOfTheDay\bin\Debug\netcoreapp3.0\Newtonsoft.Json.dll
+C:\Work\Progetti\Telegram\QuoteOfTheDay\obj\Debug\netcoreapp3.0\QuoteOfTheDay.dll
+C:\Work\Progetti\Telegram\QuoteOfTheDay\obj\Debug\netcoreapp3.0\QuoteOfTheDay.pdb

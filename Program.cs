@@ -17,7 +17,7 @@ namespace QuoteOfTheDay
             host.Services.UseScheduler(scheduler => {
 
                 scheduler
-                    .Schedule<Seneca>()
+                    .Schedule<QotdTask>()
                     .EveryTenSeconds();
 
             });
@@ -29,7 +29,7 @@ namespace QuoteOfTheDay
                 .ConfigureServices(services =>
                 {
                     services.AddScheduler();
-                    services.AddTransient<Seneca>();
+                    services.AddTransient<QotdTask>();
                 });
     }
 }
