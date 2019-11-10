@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Serilog;
 
 namespace QuoteOfTheDay
 {
@@ -14,18 +15,37 @@ namespace QuoteOfTheDay
     {
         public static void Main(string[] args)
         {
-            IHost host = CreateHostBuilder(args).Build();
-            host.Services.UseScheduler(scheduler => {
-                scheduler
-                    .Schedule<QotdTask>()
-                    .EveryTenSeconds();
-            });
+            Log.Logger = new LoggerConfiguration()
+                .Enrich.FromLogContext()
+                .WriteTo.Console()
+                .CreateLogger();
 
-            host.Run();
+            try
+            {
+                Log.Information("Starting up");
+                IHost host = CreateHostBuilder(args).Build();
+                host.Services.UseScheduler(scheduler => {
+                    scheduler
+                        .Schedule<QotdTask>()
+                        .EveryTenSeconds();
+                });
+
+                host.Run();
+            }
+            catch (Exception ex)
+            {
+                Log.Fatal(ex, "Application start-up failed");
+            }
+            finally 
+            {
+                Log.CloseAndFlush();
+            }
+            
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
+                .UseSerilog()
                 .ConfigureServices(services => {
                     services.AddScheduler();
                 })
