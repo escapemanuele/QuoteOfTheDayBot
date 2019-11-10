@@ -40,24 +40,17 @@ namespace QuoteOfTheDay.Controllers
         {
             var msgHandler = new MessageHandler(update);
 
-            if (!msgHandler.IsNull())
+            if (!msgHandler.IsNull() && msgHandler.IsStartMessage())
             {
                 var chat = new QuoteOfTheDay.Context.Chat { 
                     ChatId = update.Message.Chat.Id,
                     Name = update.Message.Chat.Username
                 };
+
                 var botClient = new TelegramBotClient(config.ApiToken);
 
-                string returnMessage = "";
-                if (db.Add(chat))
-                {
-                    returnMessage = $"Welcome aboard {chat.Name}!";
-                }
-                else 
-                {
-                    returnMessage = $"Welcome back {chat.Name}!";
-                }
-                
+                string returnMessage = db.Add(chat)? $"Welcome aboard {chat.Name}!" : $"Welcome back {chat.Name}!";
+
                 await botClient.SendTextMessageAsync(
                     chatId: chat.ChatId,
                     text: returnMessage

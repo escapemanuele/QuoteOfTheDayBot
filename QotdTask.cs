@@ -35,12 +35,16 @@ public class QotdTask : IInvocable
         var botClient = new TelegramBotClient(config.ApiToken);
         //chatID: 96546887
 
-        await botClient.SendTextMessageAsync(
-            chatId: "96546887",
-            text: quote.Quote,
-            disableNotification: true,
-            replyMarkup: new InlineKeyboardMarkup(InlineKeyboardButton.WithUrl("Check google", "https://www.google.com"))
-        );
+        var chatsId = db.GetAll();
 
+        foreach(var chatId in chatsId)
+        {
+            await botClient.SendTextMessageAsync(
+                    chatId: chatId,
+                    text: quote.Quote,
+                    disableNotification: false,
+                    replyMarkup: new InlineKeyboardMarkup(InlineKeyboardButton.WithUrl("Check google", "https://www.google.com"))
+                );
+        }
     }
 }

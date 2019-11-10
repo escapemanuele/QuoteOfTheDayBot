@@ -20,6 +20,9 @@ namespace QuoteOfTheDay
             return (Update == null) || (Update.Message == null) || string.IsNullOrEmpty(Update.Message.Text);
         }
 
-
+        public bool IsStartMessage()
+        {
+            return Update.Message.Text.Equals("/start");
+        }
     }
 }

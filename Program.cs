@@ -16,9 +16,9 @@ namespace QuoteOfTheDay
         {
             IHost host = CreateHostBuilder(args).Build();
             host.Services.UseScheduler(scheduler => {
-                /*scheduler
+                scheduler
                     .Schedule<QotdTask>()
-                    .EveryTenSeconds();*/
+                    .EveryTenSeconds();
             });
 
             host.Run();

@@ -14,6 +14,11 @@ namespace QuoteOfTheDay.Context.Repository
             dbContext = _dbContext;
         }
 
+        public List<long> GetAll()
+        {
+            return dbContext.Chats.Select(x => x.ChatId).ToList();
+        }
+
         public bool Add(Chat entity)
         {
             if (!CheckIfExists(entity.ChatId))
