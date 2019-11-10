@@ -28,12 +28,12 @@ namespace QuoteOfTheDay
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers();
+            services.AddControllers().AddNewtonsoftJson();
 
             services.Configure<BotConfiguration>(Configuration.GetSection("QotdBot"));
             services.AddTransient<QotdTask>();
             
-            services.AddDbContext<QotdDbContext>( options => options.UseSqlite("Data Source=./qotd.sqlite"));
+            services.AddDbContext<QotdDbContext>(options => options.UseSqlite("Data Source=./qotd.sqlite"));
 
             services.AddScoped<IRepository<Chat>, ChatRepository>();
         }

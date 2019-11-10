@@ -14,16 +14,19 @@ namespace QuoteOfTheDay.Context.Repository
             dbContext = _dbContext;
         }
 
-        public void Add(Chat entity)
+        public bool Add(Chat entity)
         {
             if (!CheckIfExists(entity.ChatId))
             {
                 dbContext.Chats.Add(entity);
                 dbContext.SaveChanges();
+                return true;
             }
+
+            return false;
         }
 
-        public bool CheckIfExists(int entityId)
+        public bool CheckIfExists(long entityId)
         {
             return dbContext.Chats.Any(x => x.ChatId == entityId);
         }

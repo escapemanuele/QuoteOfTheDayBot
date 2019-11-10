@@ -26,6 +26,7 @@ public class QotdTask : IInvocable
     {
         //Retrive the quote of the day
         var httpClient = new HttpClient();
+        //System.Text.Json
         var quoteJson = JObject.Parse(await httpClient.GetStringAsync("http://quotes.rest/qod.json"));
         var quote = JsonConvert.DeserializeObject<Qotd>(quoteJson["contents"]["quotes"][0].ToString());
 

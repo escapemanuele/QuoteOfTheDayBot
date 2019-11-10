@@ -6,7 +6,7 @@ namespace QuoteOfTheDay.Context
 {
     public class Chat
     {
-        public int ChatId { get; set; }
+        public long ChatId { get; set; }
         public string Name { get; set; }
     }
 }

@@ -7,8 +7,8 @@ namespace QuoteOfTheDay.Context.Repository
     public interface IRepository<TEntity>
     {
 
-        void Add(TEntity entity);
+        bool Add(TEntity entity);
 
-        bool CheckIfExists(int entityId);
+        bool CheckIfExists(long entityId);
     }
 }

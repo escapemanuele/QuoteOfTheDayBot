@@ -9,7 +9,9 @@ namespace QuoteOfTheDay.Context
     public class QotdDbContext: DbContext
     {
         public QotdDbContext(DbContextOptions<QotdDbContext> options) : base(options)
-        {}
+        {
+            this.Database.EnsureCreated();
+        }
         
         public DbSet<Chat> Chats { get; set; }
     }

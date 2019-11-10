@@ -16,9 +16,9 @@ namespace QuoteOfTheDay
         {
             IHost host = CreateHostBuilder(args).Build();
             host.Services.UseScheduler(scheduler => {
-                scheduler
+                /*scheduler
                     .Schedule<QotdTask>()
-                    .EveryTenSeconds();
+                    .EveryTenSeconds();*/
             });
 
             host.Run();
@@ -31,6 +31,7 @@ namespace QuoteOfTheDay
                 })
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
+                    webBuilder.UseUrls("http://*:8443");
                     webBuilder.UseStartup<Startup>();
                 });
     }
