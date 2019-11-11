@@ -27,7 +27,7 @@ namespace QuoteOfTheDay
                 host.Services.UseScheduler(scheduler => {
                     scheduler
                         .Schedule<QotdTask>()
-                        .EveryTenSeconds();
+                        .DailyAtHour(8);
                 });
 
                 host.Run();
