@@ -29,7 +29,8 @@ namespace QuoteOfTheDay
                         .Schedule<QotdTask>()
                         .DailyAtHour(8);
                 });
-
+                var port = System.Environment.GetEnvironmentVariable("PORT");
+                Log.Information($"Open111 on port {port}");
                 host.Run();
             }
             catch (Exception ex)
