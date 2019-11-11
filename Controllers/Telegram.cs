@@ -39,21 +39,30 @@ namespace QuoteOfTheDay.Controllers
         public async Task<IActionResult> Post(Update update)
         {
             var msgHandler = new MessageHandler(update);
-
-            if (!msgHandler.IsNull() && msgHandler.IsStartMessage())
-            {
-                var chat = new QuoteOfTheDay.Context.Chat { 
+            var botClient = new TelegramBotClient(config.ApiToken);
+            var chat = new QuoteOfTheDay.Context.Chat { 
                     ChatId = update.Message.Chat.Id,
                     Name = update.Message.Chat.Username
                 };
 
-                var botClient = new TelegramBotClient(config.ApiToken);
+            if (!msgHandler.IsNull() && msgHandler.IsStartMessage())
+            {
+                
+
+                
 
                 string returnMessage = db.Add(chat)? $"Welcome aboard {chat.Name}!" : $"Welcome back {chat.Name}!";
 
                 await botClient.SendTextMessageAsync(
                     chatId: chat.ChatId,
                     text: returnMessage
+                );
+            } 
+            else 
+            {
+                await botClient.SendTextMessageAsync(
+                    chatId: chat.ChatId,
+                    text: "strunz"
                 );
             }
 
