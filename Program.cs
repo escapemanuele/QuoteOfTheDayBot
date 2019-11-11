@@ -51,7 +51,6 @@ namespace QuoteOfTheDay
                 })
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
-                    webBuilder.UseUrls("http://*:8443");
                     webBuilder.UseStartup<Startup>();
                 });
     }
