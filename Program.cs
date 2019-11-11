@@ -51,6 +51,10 @@ namespace QuoteOfTheDay
                 })
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
+                    webBuilder.UseKestrel(options =>
+                    {
+                        options.ListenAnyIP(Int32.Parse(System.Environment.GetEnvironmentVariable("PORT")));
+                    });
                     webBuilder.UseStartup<Startup>();
                 });
     }
