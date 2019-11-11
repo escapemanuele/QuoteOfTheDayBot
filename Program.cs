@@ -55,6 +55,8 @@ namespace QuoteOfTheDay
                     {
                         options.ListenAnyIP(Int32.Parse(System.Environment.GetEnvironmentVariable("PORT")));
                     });
+                    var port = System.Environment.GetEnvironmentVariable("PORT");
+                    webBuilder.UseUrls($"https://*:{port}");
                     webBuilder.UseStartup<Startup>();
                 });
     }
