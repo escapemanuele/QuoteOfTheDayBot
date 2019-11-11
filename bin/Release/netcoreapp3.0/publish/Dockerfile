@@ -7,4 +7,4 @@ COPY . .
 
 EXPOSE 80/tcp
 
-CMD ASPNETCORE_URLS=http://* dotnet QuoteOfTheDay.dll
+CMD ASPNETCORE_URLS=http://$PORT dotnet QuoteOfTheDay.dll
