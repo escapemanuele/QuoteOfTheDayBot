@@ -29,8 +29,6 @@ namespace QuoteOfTheDay
                         .Schedule<QotdTask>()
                         .DailyAtHour(8);
                 });
-                var port = System.Environment.GetEnvironmentVariable("PORT");
-                Log.Information($"Open111 on port {port}");
                 host.Run();
             }
             catch (Exception ex)
@@ -53,7 +51,6 @@ namespace QuoteOfTheDay
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     var port = System.Environment.GetEnvironmentVariable("PORT");
-                    Log.Information($"Open on port {port}");
                     webBuilder.UseUrls($"http://*:{port}");
                     webBuilder.UseStartup<Startup>();
                 });
