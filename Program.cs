@@ -54,7 +54,7 @@ namespace QuoteOfTheDay
                 {
                     var port = System.Environment.GetEnvironmentVariable("PORT");
                     Log.Information($"Open on port {port}");
-                    webBuilder.UseUrls($"http://*:8443");
+                    webBuilder.UseUrls($"http://*:80");
                     webBuilder.UseStartup<Startup>();
                 });
     }
