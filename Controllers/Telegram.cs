@@ -47,10 +47,6 @@ namespace QuoteOfTheDay.Controllers
 
             if (!msgHandler.IsNull() && msgHandler.IsStartMessage())
             {
-                
-
-                
-
                 string returnMessage = db.Add(chat)? $"Welcome aboard {chat.Name}!" : $"Welcome back {chat.Name}!";
 
                 await botClient.SendTextMessageAsync(
