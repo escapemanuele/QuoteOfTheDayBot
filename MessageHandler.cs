@@ -24,5 +24,10 @@ namespace QuoteOfTheDay
         {
             return Update.Message.Text.Equals("/start");
         }
+
+        public bool IsQotd()
+        {
+            return Update.Message.Text.Equals("/qotd");
+        }
     }
 }

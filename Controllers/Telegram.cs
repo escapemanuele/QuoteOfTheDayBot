@@ -38,29 +38,39 @@ namespace QuoteOfTheDay.Controllers
         [HttpPost]
         public async Task<IActionResult> Post(Update update)
         {
-            string botToken = Environment.GetEnvironmentVariable("ApiToken");
+            
             var msgHandler = new MessageHandler(update);
-            var botClient = new TelegramBotClient(botToken);
-            var chat = new QuoteOfTheDay.Context.Chat { 
-                    ChatId = update.Message.Chat.Id,
-                    Name = update.Message.Chat.Username
-                };
-
-            if (!msgHandler.IsNull() && msgHandler.IsStartMessage())
+            if (!msgHandler.IsNull())
             {
-                string returnMessage = db.Add(chat)? $"Welcome aboard {chat.Name}!" : $"Welcome back {chat.Name}!";
+                string botToken = Environment.GetEnvironmentVariable("ApiToken");
+                var botClient = new TelegramBotClient(botToken);
 
-                await botClient.SendTextMessageAsync(
-                    chatId: chat.ChatId,
-                    text: returnMessage
-                );
-            } 
-            else 
-            {
-                await botClient.SendTextMessageAsync(
-                    chatId: chat.ChatId,
-                    text: "strunz"
-                );
+                if(msgHandler.IsStartMessage())
+                {
+                    
+                    var chat = new QuoteOfTheDay.Context.Chat { 
+                            ChatId = update.Message.Chat.Id,
+                            Name = update.Message.Chat.Username
+                        };
+                
+                    string returnMessage = db.Add(chat)? $"Welcome aboard {chat.Name}!" : $"Welcome back {chat.Name}!";
+
+                    await botClient.SendTextMessageAsync(
+                        chatId: chat.ChatId,
+                        text: returnMessage
+                    );
+                } 
+                else 
+                {
+                    if (msgHandler.IsQotd()) 
+                    {
+                        string qotd = await QotdTask.GetQuoteOfTheDay();
+                        await botClient.SendTextMessageAsync(
+                            chatId: update.Message.Chat.Id,
+                            text: qotd
+                        );
+                    }
+                }
             }
 
             return Ok();

@@ -23,11 +23,12 @@ namespace QuoteOfTheDay
             try
             {
                 Log.Information("Starting up");
+                int hour = int.Parse(Environment.GetEnvironmentVariable("Hour"));
                 IHost host = CreateHostBuilder(args).Build();
                 host.Services.UseScheduler(scheduler => {
                     scheduler
                         .Schedule<QotdTask>()
-                        .DailyAtHour(8);
+                        .DailyAtHour(hour);
                 });
                 host.Run();
             }

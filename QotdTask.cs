@@ -1,4 +1,5 @@
-﻿using System.Net.Http;
+﻿using System;
+using System.Net.Http;
 using System.Threading.Tasks;
 using Coravel.Invocable;
 using Microsoft.Extensions.Logging;
@@ -28,26 +29,33 @@ public class QotdTask : IInvocable
     {
         logger.LogInformation("QotdTask launched");
         //Retrive the quote of the day
-        var httpClient = new HttpClient();
-        //System.Text.Json
-        var quoteJson = JObject.Parse(await httpClient.GetStringAsync("http://quotes.rest/qod.json"));
-        var quote = JsonConvert.DeserializeObject<Qotd>(quoteJson["contents"]["quotes"][0].ToString());
+       
 
-        var botClient = new TelegramBotClient(config.ApiToken);
+        string botToken = Environment.GetEnvironmentVariable("ApiToken");
+        var botClient = new TelegramBotClient(botToken);
         //chatID: 96546887
-
+        string qotd = await QotdTask.GetQuoteOfTheDay();
         var chatsId = db.GetAll();
 
         foreach(var chatId in chatsId)
         {
             await botClient.SendTextMessageAsync(
                     chatId: chatId,
-                    text: $"*{quote.Author}*:\n\n{quote.Quote}",
+                    text: qotd,
                     parseMode: Telegram.Bot.Types.Enums.ParseMode.Markdown,
                     disableNotification: false
                 );
         }
         
         logger.LogInformation($"Sent quote to {chatsId.Count} chats");
+    }
+
+    public async static Task<string> GetQuoteOfTheDay()
+    {
+        var httpClient = new HttpClient();
+        //System.Text.Json
+        var quoteJson = JObject.Parse(await httpClient.GetStringAsync("http://quotes.rest/qod.json"));
+        Qotd qotd = JsonConvert.DeserializeObject<Qotd>(quoteJson["contents"]["quotes"][0].ToString());
+        return $"*{qotd.Author}*:\n\n{qotd.Quote}";
     }
 }
