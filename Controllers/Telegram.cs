@@ -67,6 +67,7 @@ namespace QuoteOfTheDay.Controllers
                         string qotd = await QotdTask.GetQuoteOfTheDay();
                         await botClient.SendTextMessageAsync(
                             chatId: update.Message.Chat.Id,
+                            parseMode: Telegram.Bot.Types.Enums.ParseMode.Markdown,
                             text: qotd
                         );
                     }
