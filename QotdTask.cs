@@ -32,6 +32,9 @@ public class QotdTask : IInvocable
        
 
         string botToken = Environment.GetEnvironmentVariable("ApiToken");
+        if (string.IsNullOrEmpty(botToken)) {
+            botToken = config.ApiToken;
+        }
         var botClient = new TelegramBotClient(botToken);
         //chatID: 96546887
         string qotd = await QotdTask.GetQuoteOfTheDay();

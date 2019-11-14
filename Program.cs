@@ -24,12 +24,14 @@ namespace QuoteOfTheDay
             {
                 Log.Information("Starting up");
                 int hour = int.Parse(Environment.GetEnvironmentVariable("Hour"));
+                
                 IHost host = CreateHostBuilder(args).Build();
                 host.Services.UseScheduler(scheduler => {
                     scheduler
                         .Schedule<QotdTask>()
                         .DailyAtHour(hour);
                 });
+                Log.Information($"Scheduler will be active every day at {hour} am");
                 host.Run();
             }
             catch (Exception ex)
@@ -51,7 +53,8 @@ namespace QuoteOfTheDay
                 })
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
-                    var port = System.Environment.GetEnvironmentVariable("PORT");
+                    var port = Environment.GetEnvironmentVariable("PORT");
+                    
                     webBuilder.UseUrls($"http://*:{port}");
                     webBuilder.UseStartup<Startup>();
                 });

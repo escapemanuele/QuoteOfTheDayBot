@@ -42,8 +42,7 @@ namespace QuoteOfTheDay.Controllers
             var msgHandler = new MessageHandler(update);
             if (!msgHandler.IsNull())
             {
-                string botToken = Environment.GetEnvironmentVariable("ApiToken");
-                var botClient = new TelegramBotClient(botToken);
+                var botClient = new TelegramBotClient(config.ApiToken);
 
                 if(msgHandler.IsStartMessage())
                 {
