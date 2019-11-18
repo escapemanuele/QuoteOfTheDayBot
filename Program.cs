@@ -23,7 +23,7 @@ namespace QuoteOfTheDay
             try
             {
                 Log.Information("Starting up");
-                int hour = 7;//int.Parse(Environment.GetEnvironmentVariable("HOUR"));
+                int hour = int.Parse(Environment.GetEnvironmentVariable("HOUR"));
                 
                 IHost host = CreateHostBuilder(args).Build();
                 host.Services.UseScheduler(scheduler => {

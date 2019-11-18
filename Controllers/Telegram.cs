@@ -69,6 +69,12 @@ namespace QuoteOfTheDay.Controllers
                             parseMode: Telegram.Bot.Types.Enums.ParseMode.Markdown,
                             text: qotd
                         );
+                    } else {
+                        await botClient.SendTextMessageAsync(
+                            chatId: update.Message.Chat.Id,
+                            parseMode: Telegram.Bot.Types.Enums.ParseMode.Markdown,
+                            text: "You will receive a quote every morning! You can always get the current day quote using the *commands* or writing */qotd*"
+                        );
                     }
                 }
             }
