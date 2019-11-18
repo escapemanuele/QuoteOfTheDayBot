@@ -8,5 +8,6 @@ namespace QuoteOfTheDay
     {
         public string ApiToken { get; set; }
         public string BotUsername { get; set; }
+        public string AdminChatId {get; set;}
     }
 }

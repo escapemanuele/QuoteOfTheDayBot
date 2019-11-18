@@ -36,7 +36,6 @@ public class QotdTask : IInvocable
             botToken = config.ApiToken;
         }
         var botClient = new TelegramBotClient(botToken);
-        //chatID: 96546887
         string qotd = await QotdTask.GetQuoteOfTheDay();
         var chatsId = db.GetAll();
 
@@ -51,6 +50,10 @@ public class QotdTask : IInvocable
         }
         
         logger.LogInformation($"Sent quote to {chatsId.Count} chats");
+        await botClient.SendTextMessageAsync(
+                    chatId: config.AdminChatId,
+                    text: $"Sent quote to {chatsId.Count} chats"
+        );
     }
 
     public async static Task<string> GetQuoteOfTheDay()
