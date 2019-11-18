@@ -23,7 +23,7 @@ namespace QuoteOfTheDay
             try
             {
                 Log.Information("Starting up");
-                int hour = int.Parse(Environment.GetEnvironmentVariable("Hour"));
+                int hour = 7;//int.Parse(Environment.GetEnvironmentVariable("HOUR"));
                 
                 IHost host = CreateHostBuilder(args).Build();
                 host.Services.UseScheduler(scheduler => {
@@ -56,6 +56,7 @@ namespace QuoteOfTheDay
                     var port = Environment.GetEnvironmentVariable("PORT");
                     
                     webBuilder.UseUrls($"http://*:{port}");
+                    //webBuilder.UseIISIntegration();
                     webBuilder.UseStartup<Startup>();
                 });
     }

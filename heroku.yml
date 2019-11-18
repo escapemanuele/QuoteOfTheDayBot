@@ -1,3 +1,0 @@
-build:
-  docker:
-    web: bin/Release/netcoreapp3.0/publish/Dockerfile

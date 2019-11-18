@@ -53,8 +53,6 @@ namespace QuoteOfTheDay
                 app.UseDeveloperExceptionPage();
             }
 
-            
-
             app.UseHttpsRedirection();
 
             app.UseRouting();
